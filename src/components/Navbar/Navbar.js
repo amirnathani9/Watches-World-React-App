@@ -1,6 +1,6 @@
 import logo from "../../assets/watches-world-logo.png"
 
-export default function Navbar() {
+export function Navbar() {
     return (
         <>
             <nav className="navbar-container sticky z-5">
