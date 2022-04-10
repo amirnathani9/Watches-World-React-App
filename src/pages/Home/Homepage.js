@@ -19,7 +19,7 @@ export function Homepage() {
         console.log(error)
       }
     })()
-  })
+  },[])
 
   useDocumentTitle("Watches World")
   return (
