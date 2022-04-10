@@ -1,0 +1,52 @@
+:root{
+    --primary-color-transparent:rgba(2, 129, 149, 0.1);
+}
+
+.card{
+    transition: all ease-in-out 300ms;
+    box-shadow: 5px 5px 10px var(--primary-color-transparent);
+    padding: 1rem;
+    border: none;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 5px 5px 50px var(--primary-color-transparent);
+}
+.card-text-overlay{
+    margin: -1rem;
+}
+/* Section */
+.section-heading{
+    color: var(--primary-color);
+    border-bottom: 0.25rem solid var(--primary-color);
+    font-family: 'Brygada 1918', serif;
+}
+
+/* cart quantity */
+.quantity-add,
+.quantity-remove{
+    height: 1.75rem;
+    width: 1.75rem;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+.card-quantity{
+    height: 1.75rem;
+    width: 2.5rem;
+    border-radius: 0.5rem;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0rem;
+}
+
+.letter-spacing-zero{
+    letter-spacing: 0px;
+}
