@@ -11,9 +11,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
-    "react-router-link": "^2.0.2",
     "react-scripts": "5.0.0",
-    "use-react-router": "^1.0.7",
     "uuid": "^8.3.2"
   },
   "scripts": {
