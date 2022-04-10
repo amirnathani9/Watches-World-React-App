@@ -9,13 +9,13 @@ export function Brands() {
         </h1>
         <main className="flex flex-wrap justify-center">
           {categories.map((item) => (
-            <a className="brand-items m-8">
+            <div className="brand-items m-8">
               <img
                 src={item.image}
                 alt={item.categoryName}
                 className="responsive-img"
               />
-            </a>
+            </div>
           ))}
         </main>
       </section>
