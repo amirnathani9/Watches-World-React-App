@@ -144,31 +144,6 @@ export const products = [
   {
     _id: uuid(),
     title: "Tissot",
-    model: "T-Sport",
-    image:
-      "https://raw.githubusercontent.com/amirnathani9/Watches-World-React-App/dev/public/productImages/tissot-t-sport.webp",
-    originalPrice: 50000,
-    discountedPrice: 45000,
-    discount: "10%",
-    categoryName: "Tissot",
-    ratings: 2,
-  },
-  {
-    _id: uuid(),
-    title: "Hublot",
-    model: "Classic Fusion",
-    image:
-      "https://raw.githubusercontent.com/amirnathani9/Watches-World-React-App/dev/public/productImages/hublot-classicfusion.webp",
-    originalPrice: 85000,
-    discountedPrice: 76500,
-    discount: "10%",
-    categoryName: "Hublot",
-    ratings: 4,
-  },
-
-  {
-    _id: uuid(),
-    title: "Tissot",
     model: "Super Sport",
     image:
       "https://raw.githubusercontent.com/amirnathani9/Watches-World-React-App/dev/public/productImages/tissot-supersport-chrono.webp",
