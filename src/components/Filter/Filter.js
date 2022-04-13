@@ -1,4 +1,37 @@
+import { useReducer } from "react";
+
 export function Filter() {
+
+
+
+
+  const initialFilterValue = {
+    sortByPrice: "",
+  };
+  const productFilterReducer = (state, action) => {
+    switch (action.type) {
+      case "PRICE_LOW_TO_HIGH":
+        return {...state, sortByPrice:action.type}
+      case "PRICE_HIGH_TO_LOW":
+        return {...state, sortByPrice:action.type}
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useReducer(productFilterReducer, initialFilterValue)
+
+  const getSortedPriceProducts = (products, sortByPrice) =>{
+    if(sortByPrice === "PRICE_LOW_TO_HIGH"){
+      return products.sort((firstItem, secondItem)=> firstItem.discountedPrice - secondItem.discountedPrice)
+    }
+    if(sortByPrice === "PRICE_HIGH_TO_LOW"){
+      return products.sort((firstItem, secondItem)=> secondItem.discountedPrice - firstItem.discountedPrice)
+    }
+    return products
+  }
+
+
   return (
     <>
       <section className="filter-sidebar-container flex flex-col sticky p-5">
@@ -10,12 +43,16 @@ export function Filter() {
           <h3 className="font-bold">Sort by</h3>
           <div className="my-3">
             <li className="list-item-container">
-              <input type="checkbox" />
-              <label>Price - Low to High</label>
+              <label>
+                <input type="radio" name="sort" checked = {state.sortByPrice === "PRICE_LOW_TO_HIGH"} onChange={()=>dispatch({type:"PRICE_LOW_TO_HIGH"})} />
+                Price - Low to High
+              </label>
             </li>
             <li className="list-item-container">
-              <input type="checkbox" />
-              <label>Price - High to Low</label>
+              <label>
+                <input type="radio" name="sort" checked = {state.sortByPrice === "PRICE_HIGH_TO_LOW"} onChange={()=>dispatch({type:"PRICE_HIGH_TO_LOW"})}/>
+                Price - High to Low
+              </label>
             </li>
           </div>
         </div>
