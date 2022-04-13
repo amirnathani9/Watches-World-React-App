@@ -1,22 +1,11 @@
-import "./Product.css"
-import axios from "axios";
-import { useEffect, useState } from "react";
+import "./Product.css";
+
 import { Filter, ProductListing } from "../../components";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { useProducts } from "../../contexts";
 
 export function Product() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const productsData = await axios.get("/api/products");
-        setProducts(productsData.data.products);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  });
+  const { products } = useProducts();
 
   useDocumentTitle("Products - Watches World");
   return (
