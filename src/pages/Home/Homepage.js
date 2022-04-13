@@ -1,27 +1,24 @@
-import "./homepage.css"
+import "./homepage.css";
 import axios from "axios";
 import { Brands, Hero } from "../../components";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { useEffect, useState } from "react";
 
-
 export function Homepage() {
-
-  const [productCategories, setProductCategories] = useState([])
-
+  const [productCategories, setProductCategories] = useState([]);
 
   useEffect(() => {
     (async () => {
       try {
         const categoriesData = await axios.get("/api/categories");
-        setProductCategories(categoriesData.data.categories)
+        setProductCategories(categoriesData.data.categories);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    })()
-  },[])
+    })();
+  }, []);
 
-  useDocumentTitle("Watches World")
+  useDocumentTitle("Watches World");
   return (
     <>
       <Hero />
@@ -35,8 +32,6 @@ export function Homepage() {
           ))}
         </main>
       </section>
-
-
     </>
   );
 }

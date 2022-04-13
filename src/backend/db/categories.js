@@ -26,7 +26,7 @@ export const categories = [
   },
   {
     _id: uuid(),
-    categoryName: "Taghuer",
+    categoryName: "Tagheuer",
     image:"https://watchesworld.netlify.app/assets/taghuer.png",
   },
   {
