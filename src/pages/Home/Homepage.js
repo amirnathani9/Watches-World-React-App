@@ -3,9 +3,21 @@ import axios from "axios";
 import { Brands, Hero } from "../../components";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useProductsFilter } from "../../contexts";
 
 export function Homepage() {
   const [productCategories, setProductCategories] = useState([]);
+
+  const { dispatch } = useProductsFilter();
+
+  const navigate = useNavigate();
+
+  const navigateToProducts = (categoryName) => {
+    dispatch({ type: "CLEAR" });
+    dispatch({ type: categoryName.toUpperCase() });
+    navigate("/products");
+  };
 
   useEffect(() => {
     (async () => {
@@ -18,6 +30,10 @@ export function Homepage() {
     })();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useDocumentTitle("Watches World");
   return (
     <>
@@ -28,7 +44,12 @@ export function Homepage() {
         </h1>
         <main className="flex flex-wrap justify-center">
           {productCategories.map(({ _id, categoryName, image }) => (
-            <Brands key={_id} categoryName={categoryName} image={image} />
+            <Brands
+              key={_id}
+              categoryName={categoryName}
+              image={image}
+              navigateToProducts={navigateToProducts}
+            />
           ))}
         </main>
       </section>

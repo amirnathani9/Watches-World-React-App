@@ -1,36 +1,51 @@
-import "./Product.css"
-import axios from "axios";
-import { useEffect, useState } from "react";
+import "./Product.css";
+import { useEffect } from "react";
 import { Filter, ProductListing } from "../../components";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { useProducts, useProductsFilter } from "../../contexts";
+import {
+  getFilteredCategoryProducts,
+  getFilteredPriceProducts,
+  getFIlteredRatingProducts,
+  getSortedPriceProducts,
+} from "../../utilities";
 
 export function Product() {
-  const [products, setProducts] = useState([]);
+  const { products } = useProducts();
+  const { state } = useProductsFilter();
+  const { sortByPrice, categories, price, rating } = state;
+
+  const filteredRatingProducts = getFIlteredRatingProducts(products, rating);
+  const filteredPriceProducts = getFilteredPriceProducts(
+    filteredRatingProducts,
+    price
+  );
+  const filteredCategoryProducts = getFilteredCategoryProducts(
+    filteredPriceProducts,
+    categories
+  );
+  const sortedPriceProducts = getSortedPriceProducts(
+    filteredCategoryProducts,
+    sortByPrice
+  );
 
   useEffect(() => {
-    (async () => {
-      try {
-        const productsData = await axios.get("/api/products");
-        setProducts(productsData.data.products);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  });
+    window.scrollTo(0, 0);
+  }, []);
 
   useDocumentTitle("Products - Watches World");
   return (
     <>
-      <div class="flex">
+      <div className="flex">
         <Filter />
-        <section class="product-page-container flex flex-col justify-ceneter items-center my-8">
+        <section className="product-page-container flex flex-col justify-ceneter items-center my-8">
           <div>
-            <h1 class="section-heading font-bold border-radius-1 p-2">
+            <h1 className="section-heading font-bold border-radius-1 p-2">
               Products
             </h1>
           </div>
           <main className="flex flex-wrap justify-center">
-            {products.map(
+            {sortedPriceProducts.map(
               ({
                 _id,
                 title,
