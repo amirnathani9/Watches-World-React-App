@@ -13,14 +13,21 @@ import {
 export function Product() {
   const { products } = useProducts();
   const { state } = useProductsFilter();
+  const { sortByPrice, categories, price, rating } = state;
 
-  const filteredRatingProducts = getFIlteredRatingProducts(
-    products,
-    state.rating
+  const filteredRatingProducts = getFIlteredRatingProducts(products, rating);
+  const filteredPriceProducts = getFilteredPriceProducts(
+    filteredRatingProducts,
+    price
   );
-  const filteredPriceProducts = getFilteredPriceProducts(filteredRatingProducts, state.price);
-  const filteredCategoryProducts = getFilteredCategoryProducts(filteredPriceProducts, state.categories);
-  const sortedPriceProducts = getSortedPriceProducts(filteredCategoryProducts, state.sortByPrice);
+  const filteredCategoryProducts = getFilteredCategoryProducts(
+    filteredPriceProducts,
+    categories
+  );
+  const sortedPriceProducts = getSortedPriceProducts(
+    filteredCategoryProducts,
+    sortByPrice
+  );
 
   useDocumentTitle("Products - Watches World");
   return (

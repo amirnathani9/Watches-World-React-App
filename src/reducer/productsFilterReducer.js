@@ -44,6 +44,21 @@ export const productsFilterReducer = (state, action) => {
       return { ...state, price: action.value };
     case "RATING":
       return { ...state, rating: action.value };
+    case "CLEAR":
+      return {
+        ...state,
+        sortByPrice: "",
+        categories: {
+          Rolex: false,
+          Hublot: false,
+          Rado: false,
+          Tagheuer: false,
+          Tissot: false,
+          Cartier: false,
+        },
+        price: 100000,
+        rating: 0,
+      };
     default:
       return state;
   }
