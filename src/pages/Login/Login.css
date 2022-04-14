@@ -1,0 +1,26 @@
+.login-section{
+    height: 91vh;
+}
+.login-main-container{
+    padding: 2rem;
+    box-shadow: 5px 5px 10px rgba(2, 129, 149, 0.3);
+}
+.btn{
+    margin: 1rem 0rem;
+    width: 100%;
+}
+.forget-password{
+    color: var(--primary-color);
+}
+.forget-password:hover{
+    text-decoration: underline;
+}
+.new-account-btn{
+    color: var(--primary-color);
+    font-weight: bold;
+    margin: 1rem;
+    font-size: 1.25rem;
+}
+.new-account-btn:hover{
+    text-decoration: underline;
+}
