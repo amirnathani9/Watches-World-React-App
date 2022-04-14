@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { products } from "../../backend/db/products";
 
 export function Filter() {
   const initialFilterValue = {
@@ -11,6 +12,7 @@ export function Filter() {
       tissot: false,
       cartier: false,
     },
+    price: 100000,
   };
   const productFilterReducer = (state, action) => {
     switch (action.type) {
@@ -36,7 +38,10 @@ export function Filter() {
       case "TAGHEUER":
         return {
           ...state,
-          categories: { ...state.categories, tagheuer: !state.categories.tagheuer },
+          categories: {
+            ...state.categories,
+            tagheuer: !state.categories.tagheuer,
+          },
         };
       case "TISSOT":
         return {
@@ -46,9 +51,14 @@ export function Filter() {
       case "CARTIER":
         return {
           ...state,
-          categories: { ...state.categories, cartier: !state.categories.cartier },
+          categories: {
+            ...state.categories,
+            cartier: !state.categories.cartier,
+          },
         };
-     
+      case "PRICE":
+        return{...state, price: action.value}
+
       default:
         return state;
     }
@@ -74,14 +84,17 @@ export function Filter() {
     }
     return products;
   };
-  
+
   const getFilteredCategoryProducts = (products, categories) => {
-    if (Object.values(categories).every((current) => !current)){
-      return products
+    if (Object.values(categories).every((current) => !current)) {
+      return products;
     }
-    return products.filter(product => categories[product.categoryName])
+    return products.filter((product) => categories[product.categoryName]);
   };
 
+  const getFilteredPriceProducts = (products, price) => {
+    return products.filter(product => product.discountedPrice <= price)
+  }
   return (
     <>
       <section className="filter-sidebar-container flex flex-col sticky p-5">
@@ -186,8 +199,19 @@ export function Filter() {
         <div className="my-3">
           <h3 className="font-bold">Price</h3>
           <label>
-            <input className="filter-slider my-3" type="range" />
+            <input
+              className="filter-slider my-3"
+              type="range"
+              min="10000"
+              max="100000"
+              step="10000"
+              value={state.price}
+              onChange={(e) =>
+                dispatch({ type: "PRICE", value: e.target.value })
+              }
+            />
           </label>
+          <div>Upto: Rs.{state.price}</div>
         </div>
 
         <div className="my-3">
