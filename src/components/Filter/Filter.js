@@ -1,106 +1,12 @@
-import { useReducer } from "react";
-import { products } from "../../backend/db/products";
+import { useProductsFilter } from "../../contexts";
+
+
+
 
 export function Filter() {
-  const initialFilterValue = {
-    sortByPrice: "",
-    categories: {
-      rolex: false,
-      hublot: false,
-      rado: false,
-      tagheuer: false,
-      tissot: false,
-      cartier: false,
-    },
-    price: 100000,
-    rating: 0
-  };
-  const productFilterReducer = (state, action) => {
-    switch (action.type) {
-      case "PRICE_LOW_TO_HIGH":
-        return { ...state, sortByPrice: action.type };
-      case "PRICE_HIGH_TO_LOW":
-        return { ...state, sortByPrice: action.type };
-      case "ROLEX":
-        return {
-          ...state,
-          categories: { ...state.categories, rolex: !state.categories.rolex },
-        };
-      case "HUBLOT":
-        return {
-          ...state,
-          categories: { ...state.categories, hublot: !state.categories.hublot },
-        };
-      case "RADO":
-        return {
-          ...state,
-          categories: { ...state.categories, rado: !state.categories.rado },
-        };
-      case "TAGHEUER":
-        return {
-          ...state,
-          categories: {
-            ...state.categories,
-            tagheuer: !state.categories.tagheuer,
-          },
-        };
-      case "TISSOT":
-        return {
-          ...state,
-          categories: { ...state.categories, tissot: !state.categories.tissot },
-        };
-      case "CARTIER":
-        return {
-          ...state,
-          categories: {
-            ...state.categories,
-            cartier: !state.categories.cartier,
-          },
-        };
-      case "PRICE":
-        return { ...state, price: action.value };
-      case "RATING":
-        return {...state, rating:action.value}  
-      default:
-        return state;
-    }
-  };
+ 
+  const {state, dispatch} = useProductsFilter()
 
-  const [state, dispatch] = useReducer(
-    productFilterReducer,
-    initialFilterValue
-  );
-
-  const getSortedPriceProducts = (products, sortByPrice) => {
-    if (sortByPrice === "PRICE_LOW_TO_HIGH") {
-      return products.sort(
-        (firstItem, secondItem) =>
-          firstItem.discountedPrice - secondItem.discountedPrice
-      );
-    }
-    if (sortByPrice === "PRICE_HIGH_TO_LOW") {
-      return products.sort(
-        (firstItem, secondItem) =>
-          secondItem.discountedPrice - firstItem.discountedPrice
-      );
-    }
-    return products;
-  };
-
-  const getFilteredCategoryProducts = (products, categories) => {
-    if (Object.values(categories).every((current) => !current)) {
-      return products;
-    }
-    return products.filter((product) => categories[product.categoryName]);
-  };
-
-  const getFilteredPriceProducts = (products, price) => {
-    return products.filter((product) => product.discountedPrice <= price);
-  };
-
-  const getFIlteredRatingProduct = (products, rating) => {
-    return products.filter(product => product.ratings <= rating)
-  }
   return (
     <>
       <section className="filter-sidebar-container flex flex-col sticky p-5">
