@@ -1,5 +1,5 @@
 import "./Product.css";
-
+import { useEffect } from "react";
 import { Filter, ProductListing } from "../../components";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { useProducts, useProductsFilter } from "../../contexts";
@@ -28,6 +28,10 @@ export function Product() {
     filteredCategoryProducts,
     sortByPrice
   );
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useDocumentTitle("Products - Watches World");
   return (
