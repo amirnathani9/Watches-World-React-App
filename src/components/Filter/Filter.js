@@ -13,6 +13,7 @@ export function Filter() {
       cartier: false,
     },
     price: 100000,
+    rating: 0
   };
   const productFilterReducer = (state, action) => {
     switch (action.type) {
@@ -57,8 +58,9 @@ export function Filter() {
           },
         };
       case "PRICE":
-        return{...state, price: action.value}
-
+        return { ...state, price: action.value };
+      case "RATING":
+        return {...state, rating:action.value}  
       default:
         return state;
     }
@@ -93,7 +95,11 @@ export function Filter() {
   };
 
   const getFilteredPriceProducts = (products, price) => {
-    return products.filter(product => product.discountedPrice <= price)
+    return products.filter((product) => product.discountedPrice <= price);
+  };
+
+  const getFIlteredRatingProduct = (products, rating) => {
+    return products.filter(product => product.ratings <= rating)
   }
   return (
     <>
@@ -218,20 +224,48 @@ export function Filter() {
           <h3 className="font-bold">Rating</h3>
           <div className="my-3">
             <li className="list-item-container">
-              <input type="checkbox" />
-              <label>4 stars & above</label>
+              <label>
+                <input
+                  type="radio"
+                  name="ratings"
+                  checked={state.rating === 4}
+                  onChange={() => dispatch({ type: "RATING", value: 4 })}
+                />
+                4 stars & above
+              </label>
             </li>
             <li className="list-item-container">
-              <input type="checkbox" />
-              <label>3 stars & above</label>
+              <label>
+                <input
+                  type="radio"
+                  name="ratings"
+                  checked={state.rating === 3}
+                  onChange={() => dispatch({ type: "RATING", value: 3 })}
+                />
+                3 stars & above
+              </label>
             </li>
             <li className="list-item-container">
-              <input type="checkbox" />
-              <label>2 stars & above</label>
+              <label>
+                <input
+                  type="radio"
+                  name="ratings"
+                  checked={state.rating === 2}
+                  onChange={() => dispatch({ type: "RATING", value: 2 })}
+                />
+                2 stars & above
+              </label>
             </li>
             <li className="list-item-container">
-              <input type="checkbox" />
-              <label>1 stars & above</label>
+              <label>
+                <input
+                  type="radio"
+                  name="ratings"
+                  checked={state.rating === 1}
+                  onChange={() => dispatch({ type: "RATING", value: 1 })}
+                />
+                1 stars & above
+              </label>
             </li>
           </div>
         </div>
