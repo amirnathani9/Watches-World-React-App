@@ -1,0 +1,26 @@
+.signup-section{
+    height: 91vh;
+}
+.signup-main-container{
+    padding: 1rem 3rem;
+    box-shadow: 5px 5px 10px rgba(2, 129, 149, 0.3);
+}
+.btn{
+    margin: 0.5rem 0rem;
+    width: 100%;
+}
+.forget-password{
+    color: var(--primary-color);
+}
+.forget-password:hover{
+    text-decoration: underline;
+}
+.new-account-btn{
+    color: var(--primary-color);
+    font-weight: bold;
+    margin: 1rem;
+    font-size: 1rem;
+}
+.new-account-btn:hover{
+    text-decoration: underline;
+}
