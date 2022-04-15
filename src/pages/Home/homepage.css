@@ -19,13 +19,14 @@
     color: var(--text-color-1);
 }
 
-.primary-outline-btn {
+.primary-outline-shop-btn {
     border: 2px solid var(--text-color-1);
     color: var(--text-color-1);
     transition: all ease-in-out 300ms;
+    background-color: transparent;
 }
 
-.primary-outline-btn:hover {
+.primary-outline-shop-btn:hover {
     background-color: transparent;
     transform: translateY(-2px);
     box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.2); /*this rgba variant is used only here */
