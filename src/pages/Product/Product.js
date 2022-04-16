@@ -1,19 +1,36 @@
 import "./Product.css";
 import { useEffect } from "react";
 import { Filter, ProductListing } from "../../components";
+import { encodedToken } from "../../utilities/token";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
-import { useProducts, useProductsFilter } from "../../contexts";
+import { useCart, useProducts, useProductsFilter } from "../../contexts";
 import {
   getFilteredCategoryProducts,
   getFilteredPriceProducts,
   getFIlteredRatingProducts,
   getSortedPriceProducts,
 } from "../../utilities";
+import axios from "axios";
 
 export function Product() {
   const { products } = useProducts();
   const { state } = useProductsFilter();
   const { sortByPrice, categories, price, rating } = state;
+  const { setCartItems } = useCart();
+
+  const addToCartHandler = async (product) => {
+    try {
+      const response = await axios.post(
+        "/api/user/cart",
+        { product },
+        { headers: { authorization: encodedToken } }
+      );
+      setCartItems(response.data.cart);
+      console.log(response.data.cart)
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const filteredRatingProducts = getFIlteredRatingProducts(products, rating);
   const filteredPriceProducts = getFilteredPriceProducts(
@@ -67,6 +84,17 @@ export function Product() {
                   discount={discount}
                   categoryName={categoryName}
                   ratings={ratings}
+                  addToCartHandler={() =>
+                    addToCartHandler({
+                      _id,
+                      title,
+                      model,
+                      image,
+                      originalPrice,
+                      discountedPrice,
+                      discount,
+                    })
+                  }
                 />
               )
             )}

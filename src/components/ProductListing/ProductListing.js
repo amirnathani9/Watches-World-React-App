@@ -8,6 +8,7 @@ export function ProductListing({
   discount,
   categoryName,
   ratings,
+  addToCartHandler
 }) {
   return (
     <>
@@ -31,7 +32,7 @@ export function ProductListing({
           </div>
           <div className="product-discount-percent">{discount} discount</div>
 
-          <button className="card-btn border-radius-1">
+          <button className="card-btn border-radius-1" onClick={addToCartHandler}>
             <i className="fas fa-shopping-cart card-btn-icon"></i>Add To Cart
           </button>
         </div>
