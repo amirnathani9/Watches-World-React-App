@@ -45,7 +45,7 @@ export function Navbar() {
             <li>
               <Link to="/cart" className="border-radius-2 relative">
                 <i className="fas fa-shopping-cart"></i>Cart
-                <span class="badge badge-wh-4 navbar-badge font-bold font-size-3">{cartItems.length}</span>
+                <span className="badge badge-wh-4 navbar-badge font-bold font-size-3">{cartItems.length}</span>
               </Link>
             </li>
           </ul>
