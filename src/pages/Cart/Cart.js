@@ -13,7 +13,7 @@ export function Cart() {
       ) : (
         <div className="flex flex-col justify-center items-center my-4">
           <h1 className="section-heading font-bold border-radius-1 p-2 my-8">
-            My Cart
+            My Cart({cartItems.length})
           </h1>
 
           <div className="cart-main-container section-center flex">
