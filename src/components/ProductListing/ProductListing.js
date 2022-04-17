@@ -12,6 +12,7 @@ export function ProductListing({
   categoryName,
   ratings,
   addToCartHandler,
+  addToWishlistHandler
 }) {
   const { cartItems } = useCart();
   const navigate =useNavigate()
@@ -20,7 +21,7 @@ export function ProductListing({
       <div className="card card-vertical border-radius-1 m-8">
         <div className="card-vertical-image">
           <img src={image} alt={model} className="card-img border-radius-1" />
-          <i className="far fa-heart wishlist-icon"></i>
+          <i className="far fa-heart wishlist-icon" onClick={addToWishlistHandler}></i>
           <span className="card-image-badge">
             {ratings}
             <i className="fa fa-star" aria-hidden="true"></i>
