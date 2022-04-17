@@ -13,7 +13,7 @@ export const HorizontalCard = ({
   return (
     <div className="card card-horizontal card-shadow border-radius-1 m-8">
       <div className="card-horizontal-image">
-        <img src={image} alt="watches" className="card-img border-radius-1" />
+        <img src={image} alt={model} className="card-img border-radius-1" />
       </div>
       <div className="card-content">
         <div className="card-heading">
