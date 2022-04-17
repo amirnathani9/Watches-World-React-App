@@ -1,6 +1,6 @@
 import {useCart} from "../../contexts/cart-context"
 
-export const CartPriceCard = ({}) => {
+export const CartPriceCard = () => {
   const {cartItems} = useCart()
 
   const deliveryCharges = 499
