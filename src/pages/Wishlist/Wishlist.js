@@ -8,16 +8,7 @@ import { encodedToken } from "../../utilities/token";
 export const Wishlist = () => {
   const { wishlistItems, setWishlistItems } = useWishlist();
 
-  const removeFromWishlistHandler = async (productId) => {
-    try {
-      const response = await axios.delete(`/api/user/wishlist/${productId}`, {
-        headers: { authorization: encodedToken },
-      });
-      setWishlistItems(response.data.wishlist);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   useDocumentTitle("Wishlist - Watches World");
   return (
@@ -46,7 +37,7 @@ export const Wishlist = () => {
             originalPrice={originalPrice}
             discountedPrice={discountedPrice}
             discount={discount}
-            removeFromWishlistHandler={removeFromWishlistHandler}
+            // removeFromWishlistHandler={removeFromWishlistHandler}
           />
         )
       )}
