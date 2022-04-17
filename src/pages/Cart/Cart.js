@@ -17,6 +17,28 @@ export function Cart() {
       console.log(error);
     }
   };
+  const productsQuantityHandler = async (productId, btnType) => {
+    try {
+      const response = await axios.post(
+        `/api/user/cart/${productId}`,
+        {
+          action: { type: btnType },
+        },
+        { headers: { authorization: encodedToken } }
+      );
+
+      let currProduct = response.data.cart.find(
+        (item) => item._id === productId
+      );
+      if (currProduct.qty < 1) {
+        removeFromCartHandler(productId);
+      } else {
+        setCartItems(response.data.cart);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useDocumentTitle("Cart - Watches World");
   return (
@@ -53,6 +75,7 @@ export function Cart() {
                     discount={discount}
                     qty={qty}
                     removeFromCartHandler={removeFromCartHandler}
+                    productsQuantityHandler={productsQuantityHandler}
                   />
                 )
               )}
