@@ -1,9 +1,22 @@
+import axios from "axios";
 import { CartPriceCard, EmptyCart, HorizontalCard } from "../../components";
 import { useCart } from "../../contexts";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { encodedToken } from "../../utilities/token";
 import "./Cart.css";
 export function Cart() {
-  const { cartItems } = useCart();
+  const { cartItems, setCartItems } = useCart();
+
+  const removeFromCartHandler = async (productId) => {
+    try {
+      const response = await axios.delete(`/api/user/cart/${productId}`, {
+        headers: { authorization: encodedToken },
+      });
+      setCartItems(response.data.cart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useDocumentTitle("Cart - Watches World");
   return (
@@ -31,6 +44,7 @@ export function Cart() {
                 }) => (
                   <HorizontalCard
                     key={_id}
+                    _id={_id}
                     title={title}
                     model={model}
                     image={image}
@@ -38,6 +52,7 @@ export function Cart() {
                     discountedPrice={discountedPrice}
                     discount={discount}
                     qty={qty}
+                    removeFromCartHandler={removeFromCartHandler}
                   />
                 )
               )}

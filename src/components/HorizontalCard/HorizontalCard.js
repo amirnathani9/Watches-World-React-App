@@ -7,6 +7,7 @@ export const HorizontalCard = ({
   discountedPrice,
   discount,
   qty,
+  removeFromCartHandler
 }) => {
   return (
     <div className="card card-horizontal card-shadow border-radius-1 m-8">
@@ -36,7 +37,7 @@ export const HorizontalCard = ({
           <i className="fas fa-shopping-cart card-btn-icon"></i>
           Move To wishlist
         </button>
-        <button className="card-secondary-btn font-size-4 border-radius-1">
+        <button className="card-secondary-btn font-size-4 border-radius-1" onClick={()=>removeFromCartHandler(_id) }>
           Remove from Cart
         </button>
       </div>
