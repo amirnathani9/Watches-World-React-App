@@ -9,7 +9,7 @@ export const EmptyCart = () => {
       <h2>Cart Is Empty</h2>
       <Link to="/products">
       <button className="btn primary-outline-btn font-size-5 border-radius-1">
-        Go To Cart
+        Go To Products
       </button>
       </Link>
       
