@@ -50,3 +50,8 @@
 .letter-spacing-zero{
     letter-spacing: 0px;
 }
+.navbar-badge{
+    top: -15%;
+    right: 10%;
+    background-color: var(--secondary-color);
+}

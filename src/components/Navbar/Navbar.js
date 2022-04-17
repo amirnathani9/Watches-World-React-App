@@ -1,7 +1,9 @@
 import logo from "../../assets/watches-world-logo.png";
 import { Link } from "react-router-dom";
+import { useCart } from "../../contexts";
 
 export function Navbar() {
+  const {cartItems} = useCart()
   return (
     <>
       <nav className="navbar-container sticky z-5">
@@ -41,8 +43,9 @@ export function Navbar() {
               </Link>
             </li>
             <li>
-              <Link to="/cart" className="border-radius-2">
+              <Link to="/cart" className="border-radius-2 relative">
                 <i className="fas fa-shopping-cart"></i>Cart
+                <span className="badge badge-wh-4 navbar-badge font-bold font-size-3">{cartItems.length}</span>
               </Link>
             </li>
           </ul>

@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../../contexts";
+
 export function ProductListing({
   _id,
   title,
@@ -8,7 +11,10 @@ export function ProductListing({
   discount,
   categoryName,
   ratings,
+  addToCartHandler,
 }) {
+  const { cartItems } = useCart();
+  const navigate =useNavigate()
   return (
     <>
       <div className="card card-vertical border-radius-1 m-8">
@@ -31,9 +37,18 @@ export function ProductListing({
           </div>
           <div className="product-discount-percent">{discount} discount</div>
 
-          <button className="card-btn border-radius-1">
-            <i className="fas fa-shopping-cart card-btn-icon"></i>Add To Cart
-          </button>
+          {cartItems.find((e) => e._id === _id) ? (
+            <button className="card-btn border-radius-1" onClick={()=>navigate("/cart")}>
+              <i className="fas fa-shopping-cart card-btn-icon"></i>Go To Cart
+            </button>
+          ) : (
+            <button
+              className="card-btn border-radius-1"
+              onClick={addToCartHandler}
+            >
+              <i className="fas fa-shopping-cart card-btn-icon"></i>Add To Cart
+            </button>
+          )}
         </div>
       </div>
     </>
