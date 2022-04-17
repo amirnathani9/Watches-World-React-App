@@ -6,6 +6,7 @@ export const WishlistCard = ({
   originalPrice,
   discountedPrice,
   discount,
+  removeFromWishlistHandler
 }) => {
   return (
     <main className="wishlist-container flex flex-wrap justify-center">
@@ -30,7 +31,7 @@ export const WishlistCard = ({
           <button className="card-btn">
             <i className="fas fa-shopping-cart card-btn-icon"></i>Move To Cart
           </button>
-          <button className="card-secondary-btn">Remove from Wishlist</button>
+          <button className="card-secondary-btn" onClick = {()=>removeFromWishlistHandler(_id)}>Remove from Wishlist</button>
         </div>
       </div>
     </main>
