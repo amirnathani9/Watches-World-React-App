@@ -1,11 +1,12 @@
 import axios from "axios";
 import { CartPriceCard, EmptyCart, HorizontalCard } from "../../components";
-import { useCart } from "../../contexts";
+import { useCart, useWishlist } from "../../contexts";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { encodedToken } from "../../utilities/token";
 import "./Cart.css";
 export const Cart = () => {
   const { cartItems, setCartItems } = useCart();
+  const { setWishlistItems } = useWishlist();
 
   const removeFromCartHandler = async (productId) => {
     try {
@@ -35,6 +36,20 @@ export const Cart = () => {
       } else {
         setCartItems(response.data.cart);
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const moveToWishlistHandler = async (product) => {
+    try {
+      const respone = await axios.post(
+        "/api/user/wishlist",
+        { product },
+        { headers: { authorization: encodedToken } }
+      );
+      setWishlistItems(respone.data.wishlist);
+      removeFromCartHandler(product._id)
     } catch (error) {
       console.log(error);
     }
@@ -76,6 +91,17 @@ export const Cart = () => {
                     qty={qty}
                     removeFromCartHandler={removeFromCartHandler}
                     productsQuantityHandler={productsQuantityHandler}
+                    moveToWishlistHandler={() =>
+                      moveToWishlistHandler({
+                        _id,
+                        title,
+                        model,
+                        image,
+                        originalPrice,
+                        discountedPrice,
+                        discount,
+                      })
+                    }
                   />
                 )
               )}
@@ -86,4 +112,4 @@ export const Cart = () => {
       )}
     </div>
   );
-}
+};

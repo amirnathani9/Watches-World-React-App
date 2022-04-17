@@ -8,7 +8,8 @@ export const HorizontalCard = ({
   discount,
   qty,
   removeFromCartHandler,
-  productsQuantityHandler
+  productsQuantityHandler,
+  moveToWishlistHandler
 }) => {
   return (
     <div className="card card-horizontal card-shadow border-radius-1 m-8">
@@ -34,7 +35,7 @@ export const HorizontalCard = ({
             <i className="fa fa-plus" onClick={()=>productsQuantityHandler(_id, "increment")}></i>
           </span>
         </div>
-        <button className="card-btn font-size-4 border-radius-1">
+        <button className="card-btn font-size-4 border-radius-1" onClick={moveToWishlistHandler}>
           <i className="fas fa-shopping-cart card-btn-icon"></i>
           Move To wishlist
         </button>
