@@ -2,8 +2,10 @@ import "./Wishlist.css";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 import { WishlistCard } from "../../components";
+import { useWishlist } from "../../contexts";
 
 export const Wishlist = () => {
+  const { wishlistItems } = useWishlist();
   useDocumentTitle("Wishlist - Watches World");
   return (
     <section className="section-center flex flex-col justify-ceneter items-center my-4">
@@ -31,7 +33,6 @@ export const Wishlist = () => {
               originalPrice={originalPrice}
               discountedPrice={discountedPrice}
               discount={discount}
-              // removeFromWishlistHandler={removeFromWishlistHandler}
             />
           )
         )}
