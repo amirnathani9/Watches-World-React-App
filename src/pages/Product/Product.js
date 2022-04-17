@@ -26,7 +26,6 @@ export function Product() {
         { headers: { authorization: encodedToken } }
       );
       setCartItems(response.data.cart);
-      console.log(response.data.cart)
     } catch (error) {
       console.log(error);
     }
@@ -76,6 +75,7 @@ export function Product() {
               }) => (
                 <ProductListing
                   key={_id}
+                  _id={_id}
                   title={title}
                   model={model}
                   image={image}
