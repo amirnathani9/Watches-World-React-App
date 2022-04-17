@@ -4,7 +4,7 @@ import { useCart } from "../../contexts";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import { encodedToken } from "../../utilities/token";
 import "./Cart.css";
-export function Cart() {
+export const Cart = () => {
   const { cartItems, setCartItems } = useCart();
 
   const removeFromCartHandler = async (productId) => {
