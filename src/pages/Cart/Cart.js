@@ -1,4 +1,4 @@
-import { EmptyCart, HorizontalCard } from "../../components";
+import { CartPriceCard, EmptyCart, HorizontalCard } from "../../components";
 import { useCart } from "../../contexts";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import "./Cart.css";
@@ -42,7 +42,7 @@ export function Cart() {
                 )
               )}
             </section>
-            
+            <CartPriceCard />
           </div>
         </div>
       )}
