@@ -7,3 +7,4 @@ export { HorizontalCard } from "./HorizontalCard/HorizontalCard";
 export { EmptyCart } from "./EmptyCart/EmptyCart";
 export { CartPriceCard } from "./CartPriceCard/CartPriceCard";
 export { WishlistCard } from "./WishlistCard/WishlistCard";
+export { EmptyWishlist } from "./EmptyWishlist/EmptyWishlist";

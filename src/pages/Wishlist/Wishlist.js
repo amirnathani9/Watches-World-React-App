@@ -1,7 +1,7 @@
 import "./Wishlist.css";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
-import { WishlistCard } from "../../components";
+import { EmptyCart, EmptyWishlist, WishlistCard } from "../../components";
 import { useCart, useWishlist } from "../../contexts";
 import axios from "axios";
 import { encodedToken } from "../../utilities/token";
@@ -19,7 +19,7 @@ export const Wishlist = () => {
         { headers: { authorization: encodedToken } }
       );
       setCartItems(response.data.cart);
-      removeFromWishlistHandler(product._id, setWishlistItems)
+      removeFromWishlistHandler(product._id, setWishlistItems);
     } catch (error) {
       console.log(error);
     }
@@ -27,47 +27,53 @@ export const Wishlist = () => {
 
   useDocumentTitle("Wishlist - Watches World");
   return (
-    <section className="section-center flex flex-col justify-ceneter items-center my-4">
-      <h1 className="section-heading font-bold border-radius-1 p-2 my-8">
-        My Wishlist
-      </h1>
-      <div>
-        {wishlistItems.map(
-          ({
-            _id,
-            title,
-            model,
-            image,
-            originalPrice,
-            discountedPrice,
-            discount,
-            qty,
-          }) => (
-            <WishlistCard
-              key={_id}
-              _id={_id}
-              title={title}
-              model={model}
-              image={image}
-              originalPrice={originalPrice}
-              discountedPrice={discountedPrice}
-              discount={discount}
-              moveToCartHandler={() =>
-                moveToCartHandler({
-                  _id,
-                  title,
-                  model,
-                  image,
-                  originalPrice,
-                  discountedPrice,
-                  discount,
-                  qty,
-                })
-              }
-            />
-          )
-        )}
-      </div>
-    </section>
+    <div>
+      {wishlistItems.length<=0 ? (
+        <EmptyWishlist />
+      ) : (
+        <section className="section-center flex flex-col justify-ceneter items-center my-4">
+          <h1 className="section-heading font-bold border-radius-1 p-2 my-8">
+            My Wishlist ({wishlistItems.length})
+          </h1>
+          <div>
+            {wishlistItems.map(
+              ({
+                _id,
+                title,
+                model,
+                image,
+                originalPrice,
+                discountedPrice,
+                discount,
+                qty,
+              }) => (
+                <WishlistCard
+                  key={_id}
+                  _id={_id}
+                  title={title}
+                  model={model}
+                  image={image}
+                  originalPrice={originalPrice}
+                  discountedPrice={discountedPrice}
+                  discount={discount}
+                  moveToCartHandler={() =>
+                    moveToCartHandler({
+                      _id,
+                      title,
+                      model,
+                      image,
+                      originalPrice,
+                      discountedPrice,
+                      discount,
+                      qty,
+                    })
+                  }
+                />
+              )
+            )}
+          </div>
+        </section>
+      )}
+    </div>
   );
 };
