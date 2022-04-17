@@ -2,10 +2,29 @@ import "./Wishlist.css";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 import { WishlistCard } from "../../components";
-import { useWishlist } from "../../contexts";
+import { useCart, useWishlist } from "../../contexts";
+import axios from "axios";
+import { encodedToken } from "../../utilities/token";
+import { removeFromWishlistHandler } from "../../utilities/wishlist/removeFromWishlist";
 
 export const Wishlist = () => {
-  const { wishlistItems } = useWishlist();
+  const { wishlistItems, setWishlistItems } = useWishlist();
+  const { setCartItems } = useCart();
+
+  const moveToCartHandler = async (product) => {
+    try {
+      const response = await axios.post(
+        "/api/user/cart",
+        { product },
+        { headers: { authorization: encodedToken } }
+      );
+      setCartItems(response.data.cart);
+      removeFromWishlistHandler(product._id, setWishlistItems)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useDocumentTitle("Wishlist - Watches World");
   return (
     <section className="section-center flex flex-col justify-ceneter items-center my-4">
@@ -33,6 +52,18 @@ export const Wishlist = () => {
               originalPrice={originalPrice}
               discountedPrice={discountedPrice}
               discount={discount}
+              moveToCartHandler={() =>
+                moveToCartHandler({
+                  _id,
+                  title,
+                  model,
+                  image,
+                  originalPrice,
+                  discountedPrice,
+                  discount,
+                  qty,
+                })
+              }
             />
           )
         )}

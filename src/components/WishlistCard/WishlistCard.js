@@ -9,6 +9,7 @@ export const WishlistCard = ({
   originalPrice,
   discountedPrice,
   discount,
+  moveToCartHandler
 }) => {
   const {setWishlistItems} =useWishlist()
   return (
@@ -31,7 +32,7 @@ export const WishlistCard = ({
             <span className="product-original-price">₹{originalPrice}</span>
           </div>
           <div className="product-discount-percent">{discount} Discount</div>
-          <button className="card-btn">
+          <button className="card-btn" onClick={moveToCartHandler}>
             <i className="fas fa-shopping-cart card-btn-icon"></i>Move To Cart
           </button>
           <button className="card-secondary-btn" onClick = {()=>removeFromWishlistHandler(_id,setWishlistItems)}>Remove from Wishlist</button>
