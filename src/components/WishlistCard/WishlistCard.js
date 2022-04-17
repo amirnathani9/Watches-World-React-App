@@ -16,8 +16,8 @@ export const WishlistCard = ({
       <div className="card card-horizontal card-shadow border-radius-1 m-8">
         <div className="card-horizontal-image">
           <img
-            src="https://nomark-ui.netlify.app/assests/card-image.jpeg"
-            alt="watches"
+            src={image}
+            alt={model}
             className="card-img"
           />
         </div>
