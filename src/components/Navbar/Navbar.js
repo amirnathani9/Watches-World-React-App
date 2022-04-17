@@ -1,9 +1,10 @@
 import logo from "../../assets/watches-world-logo.png";
 import { Link } from "react-router-dom";
-import { useCart } from "../../contexts";
+import { useCart, useWishlist } from "../../contexts";
 
 export function Navbar() {
   const {cartItems} = useCart()
+  const {wishlistItems} =useWishlist()
   return (
     <>
       <nav className="navbar-container sticky z-5">
@@ -38,14 +39,15 @@ export function Navbar() {
               </Link>
             </li>
             <li>
-              <Link to="/wishlist" className="border-radius-2">
+              <Link to="/wishlist" className="border-radius-2 relative">
                 <i className="fas fa-heart"></i>Wishlist
+                <span className="badge badge-wh-4 navbar-badge-wishlist font-bold font-size-3">{wishlistItems.length}</span>
               </Link>
             </li>
             <li>
               <Link to="/cart" className="border-radius-2 relative">
                 <i className="fas fa-shopping-cart"></i>Cart
-                <span className="badge badge-wh-4 navbar-badge font-bold font-size-3">{cartItems.length}</span>
+                <span className="badge badge-wh-4 navbar-badge-cart font-bold font-size-3">{cartItems.length}</span>
               </Link>
             </li>
           </ul>
