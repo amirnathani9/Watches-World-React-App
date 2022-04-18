@@ -1,18 +1,18 @@
 
 # Watches World
 
-## Watches World is a E-commerce Website for best premium watches.
+## Watches World is a E-commerce Website for the best Premium Watches.
 
 
 ## Demo
 
 ### Live link   
-[![WatchesWorld](https://img.shields.io/badge/WatchesWorld-000?style=for-the-badge)](https://watchesworld.netlify.app/)
+[![WatchesWorld](https://img.shields.io/badge/WatchesWorld-000?style=for-the-badge)](https://watchesworldreact.netlify.app/)
 
 
 ### Demo Video
 
-https://user-images.githubusercontent.com/47810774/155232756-ccaddc51-c8b1-4d3f-827b-3d3a34d9d9b7.mp4
+https://user-images.githubusercontent.com/47810774/163738844-d0b8b135-3f8d-4a43-b7fa-cd2998f68bb5.mp4
 
 
 ## Tech Stack
@@ -21,21 +21,41 @@ https://user-images.githubusercontent.com/47810774/155232756-ccaddc51-c8b1-4d3f-
 - HTML
 - CSS 
 - Javascript
+- ReactJS
+
+**Backend** :
+  - [Mockbee](https://mockbee.netlify.app/)
+
 
 **Hosted** :
 - Netlify
 
 ## Library Used
   - [NOMARK UI](https://nomark-ui.netlify.app/)
+
+
   
 ## Contains
 
-  - [Homepage](https://watchesworld.netlify.app/index.html)
-  - [Products page](https://watchesworld.netlify.app/pages/product.html)
-  - [Wishlist page](https://watchesworld.netlify.app/pages/wishlist.html)
-  - [Cart page](https://watchesworld.netlify.app/pages/cart.html)
-  - [Login page](https://watchesworld.netlify.app/pages/login.html)
-  - [Signup page](https://watchesworld.netlify.app/pages/signup.html)
+  - Home Page 
+  - Product Page
+  - Wishlist Page
+  - Cart Page
+  - Login Page
+  - Signup Page
+
+## Features
+  - Category Listing
+  - Product Listing
+  - Filter Products by
+    - Category
+    - Price
+    - Rating
+  - Sort Products by
+    - Price: Low to High
+    - Price: High to Low  
+  - Cart Management
+  - Wishlist Management
 
 
 ## Connect with Me
@@ -45,4 +65,4 @@ https://user-images.githubusercontent.com/47810774/155232756-ccaddc51-c8b1-4d3f-
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aamirnathani/)
 
-If You Like the Watches World give the :star: on this repo!
+If You Like the Watches World React Ecom Website give the :star: on this repo!
