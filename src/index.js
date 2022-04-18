@@ -8,6 +8,7 @@ import {
   CartProvider,
   ProductsFilterProvider,
   ProductsProvider,
+  WishlistProvider,
 } from "./contexts";
 
 // Call make Server
@@ -24,7 +25,9 @@ root.render(
       <ProductsProvider>
         <ProductsFilterProvider>
           <CartProvider>
-            <App />
+            <WishlistProvider>
+              <App />
+            </WishlistProvider>
           </CartProvider>
         </ProductsFilterProvider>
       </ProductsProvider>

@@ -3,7 +3,12 @@ import { useEffect } from "react";
 import { Filter, ProductListing } from "../../components";
 import { encodedToken } from "../../utilities/token";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
-import { useCart, useProducts, useProductsFilter } from "../../contexts";
+import {
+  useCart,
+  useProducts,
+  useProductsFilter,
+  useWishlist,
+} from "../../contexts";
 import {
   getFilteredCategoryProducts,
   getFilteredPriceProducts,
@@ -17,6 +22,7 @@ export function Product() {
   const { state } = useProductsFilter();
   const { sortByPrice, categories, price, rating } = state;
   const { setCartItems } = useCart();
+  const { setWishlistItems } = useWishlist()
 
   const addToCartHandler = async (product) => {
     try {
@@ -26,6 +32,18 @@ export function Product() {
         { headers: { authorization: encodedToken } }
       );
       setCartItems(response.data.cart);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addToWishlistHandler = async (product) => {
+    try {
+      const response = await axios.post(
+        "/api/user/wishlist",
+        { product },
+        { headers: { authorization: encodedToken } }
+      );
+      setWishlistItems(response.data.wishlist);
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +104,17 @@ export function Product() {
                   ratings={ratings}
                   addToCartHandler={() =>
                     addToCartHandler({
+                      _id,
+                      title,
+                      model,
+                      image,
+                      originalPrice,
+                      discountedPrice,
+                      discount,
+                    })
+                  }
+                  addToWishlistHandler={() =>
+                    addToWishlistHandler({
                       _id,
                       title,
                       model,

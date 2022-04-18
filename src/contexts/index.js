@@ -6,3 +6,5 @@ export {
 } from "./products-filter-context";
 
 export { useCart, CartProvider } from "./cart-context";
+
+export { useWishlist, WishlistProvider} from "./wislist-context"

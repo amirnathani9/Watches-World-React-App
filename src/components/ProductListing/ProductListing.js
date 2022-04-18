@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../../contexts";
+import { useCart, useWishlist } from "../../contexts";
+import { removeFromWishlistHandler } from "../../utilities/wishlist/removeFromWishlist";
 
 export function ProductListing({
   _id,
@@ -12,15 +13,27 @@ export function ProductListing({
   categoryName,
   ratings,
   addToCartHandler,
+  addToWishlistHandler,
 }) {
   const { cartItems } = useCart();
-  const navigate =useNavigate()
+  const { wishlistItems, setWishlistItems } = useWishlist();
+  const navigate = useNavigate();
   return (
     <>
       <div className="card card-vertical border-radius-1 m-8">
         <div className="card-vertical-image">
           <img src={image} alt={model} className="card-img border-radius-1" />
-          <i className="far fa-heart wishlist-icon"></i>
+          {wishlistItems.find((item) => item._id === _id) ? (
+            <i
+              className="fas fa-heart wishlist-icon"
+              onClick={()=>removeFromWishlistHandler(_id,setWishlistItems)}
+            ></i>
+          ) : (
+            <i
+              className="far fa-heart wishlist-icon"
+              onClick={addToWishlistHandler}
+            ></i>
+          )}
           <span className="card-image-badge">
             {ratings}
             <i className="fa fa-star" aria-hidden="true"></i>
@@ -38,7 +51,10 @@ export function ProductListing({
           <div className="product-discount-percent">{discount} discount</div>
 
           {cartItems.find((e) => e._id === _id) ? (
-            <button className="card-btn border-radius-1" onClick={()=>navigate("/cart")}>
+            <button
+              className="card-btn border-radius-1"
+              onClick={() => navigate("/cart")}
+            >
               <i className="fas fa-shopping-cart card-btn-icon"></i>Go To Cart
             </button>
           ) : (

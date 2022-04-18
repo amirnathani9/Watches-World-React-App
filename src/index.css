@@ -50,8 +50,13 @@
 .letter-spacing-zero{
     letter-spacing: 0px;
 }
-.navbar-badge{
+.navbar-badge-cart{
     top: -15%;
     right: 10%;
+    background-color: var(--secondary-color);
+}
+.navbar-badge-wishlist{
+    top: -15%;
+    right: 25%;
     background-color: var(--secondary-color);
 }
