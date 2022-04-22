@@ -2,9 +2,38 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import "./Login.css";
+import { useEffect, useReducer } from "react/cjs/react.production.min";
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
-  console.log(user);
+
+  const initialAuthReducerValue = { isAuth: false, user: "", encodedToken: "" };
+
+  const [state, dispatch] = useReducer(authReducer, initialAuthReducerValue);
+
+  const authReducer = (state, action) => {
+    switch (action.type) {
+      case "AUTH_SUCCESS":
+        return {
+          ...state,
+          isAuth: action.payload.encodedToken ? true : false,
+          user: action.payload.user,
+          encodedToken: action.payload.encodedToken,
+        };
+      default:
+        return state;
+    }
+  };
+  useEffect(() => {
+    dispatch({
+      type: "AUTH_SUCCESS",
+      payload: {
+        user: JSON.parse(localStorage.getItem("user")),
+        encodedToken: localStorage.getItem("token"),
+      },
+    });
+  });
+
+  // console.log(user);
   useDocumentTitle("Login - Watches World");
   return (
     <>
@@ -44,10 +73,16 @@ export const Login = () => {
                 Forget your Password
               </div>
             </div>
-            <button type="submit" className="btn primary-outline-btn font-size-5 border-radius-1 py-2">
+            <button
+              type="submit"
+              className="btn primary-outline-btn font-size-5 border-radius-1 py-2"
+            >
               Login
             </button>
-            <button type="button" className="btn secondary-btn font-size-4 border-radius-1 py-2">
+            <button
+              type="button"
+              className="btn secondary-btn font-size-4 border-radius-1 py-2"
+            >
               Guest Login
             </button>
           </form>
