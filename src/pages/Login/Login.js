@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import "./Login.css";
-import { useEffect, useReducer } from "react/cjs/react.production.min";
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
 
   const initialAuthReducerValue = { isAuth: false, user: "", encodedToken: "" };
 
-  const [state, dispatch] = useReducer(authReducer, initialAuthReducerValue);
+
 
   const authReducer = (state, action) => {
     switch (action.type) {
@@ -23,6 +22,9 @@ export const Login = () => {
         return state;
     }
   };
+
+  const [state, dispatch] = useReducer(authReducer, initialAuthReducerValue);
+  
   useEffect(() => {
     dispatch({
       type: "AUTH_SUCCESS",
@@ -33,7 +35,6 @@ export const Login = () => {
     });
   });
 
-  // console.log(user);
   useDocumentTitle("Login - Watches World");
   return (
     <>
