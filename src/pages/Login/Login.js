@@ -1,39 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, useReducer } from "react";
+import { useState } from "react";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import "./Login.css";
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
-
-  const initialAuthReducerValue = { isAuth: false, user: "", encodedToken: "" };
-
-
-
-  const authReducer = (state, action) => {
-    switch (action.type) {
-      case "AUTH_SUCCESS":
-        return {
-          ...state,
-          isAuth: action.payload.encodedToken ? true : false,
-          user: action.payload.user,
-          encodedToken: action.payload.encodedToken,
-        };
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(authReducer, initialAuthReducerValue);
-  
-  useEffect(() => {
-    dispatch({
-      type: "AUTH_SUCCESS",
-      payload: {
-        user: JSON.parse(localStorage.getItem("user")),
-        encodedToken: localStorage.getItem("token"),
-      },
-    });
-  });
 
   useDocumentTitle("Login - Watches World");
   return (
