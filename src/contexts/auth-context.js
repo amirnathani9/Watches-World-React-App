@@ -7,20 +7,23 @@ const initialAuthReducerValue = { isAuth: false, user: "", encodedToken: "" };
 const AuthContext = createContext(initialAuthReducerValue);
 
 const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initialAuthReducerValue);
+  const [authState, authDispatch] = useReducer(
+    authReducer,
+    initialAuthReducerValue
+  );
 
   useEffect(() => {
-    dispatch({
+    authDispatch({
       type: "AUTH_SUCCESS",
       payload: {
         user: JSON.parse(localStorage.getItem("user")),
         encodedToken: localStorage.getItem("token"),
       },
     });
-  });
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ state, dispatch }}>
+    <AuthContext.Provider value={{ authState, authDispatch }}>
       {children}
     </AuthContext.Provider>
   );
