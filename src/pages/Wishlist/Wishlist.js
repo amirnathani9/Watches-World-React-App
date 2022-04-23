@@ -1,7 +1,7 @@
 import "./Wishlist.css";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
-import { EmptyCart, EmptyWishlist, WishlistCard } from "../../components";
+import { EmptyWishlist, WishlistCard } from "../../components";
 import { useCart, useWishlist } from "../../contexts";
 import axios from "axios";
 import { encodedToken } from "../../utilities/token";
