@@ -9,6 +9,12 @@ export const Login = () => {
   const navigate = useNavigate();
   const { authDispatch } = useAuth();
 
+  const [hidePass, sethidePass] = useState(true);
+
+  const showHide = () => {
+    hidePass ? sethidePass(false) : sethidePass(true);
+  };
+
   const loginButtonHandler = async (e, userData) => {
     e.preventDefault();
     try {
@@ -49,17 +55,25 @@ export const Login = () => {
                 onChange={(e) => setUser({ ...user, email: e.target.value })}
               />
             </label>
-            <label className="input-label my-4">
+            <label className="input-label my-4 relative">
               Password*
               <input
-                type="password"
+                type={hidePass ? "password" : "text"}
                 placeholder="Enter your password"
                 className="input border-radius-1"
                 required
                 value={user.password}
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
-              />
+              ></input>
+              <i
+                className={`${
+                  hidePass ? "fa fa-eye" : "fa fa-eye-slash"
+                } pointer absolute show-hide-btn`}
+                aria-hidden="true"
+                onClick={showHide}
+              ></i>
             </label>
+
             <div className="flex items-center">
               <label className="flex items-center font-bold my-4 letter-spacing-zero">
                 <input type="checkbox" /> Remember me
