@@ -1,9 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import "./Login.css";
+import axios from "axios";
+import { useAuth } from "../../contexts";
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
+  const navigate = useNavigate();
+  const { authDispatch } = useAuth();
+
+  const loginButtonHandler = async (e, userData) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("/api/auth/login", userData);
+      const { foundUser, encodedToken } = response.data;
+      if (response.status === 200) {
+        authDispatch({
+          type: "AUTH_SUCCESS",
+          payload: { foundUser, encodedToken },
+        });
+        localStorage.setItem("user", JSON.stringify(foundUser));
+        localStorage.setItem("encodedToken", encodedToken);
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+      navigate("/login");
+    }
+  };
 
   useDocumentTitle("Login - Watches World");
   return (
@@ -47,12 +71,24 @@ export const Login = () => {
             <button
               type="submit"
               className="btn primary-outline-btn font-size-5 border-radius-1 py-2"
+              onClick={(e) =>
+                loginButtonHandler(e, {
+                  email: user.email,
+                  password: user.password,
+                })
+              }
             >
               Login
             </button>
             <button
               type="button"
               className="btn secondary-btn font-size-4 border-radius-1 py-2"
+              onClick={(e) =>
+                loginButtonHandler(e, {
+                  email: "aamirnathani@gmail.com",
+                  password: "aamir",
+                })
+              }
             >
               Guest Login
             </button>
