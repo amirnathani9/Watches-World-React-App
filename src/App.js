@@ -1,7 +1,7 @@
-import {Navbar} from "./components"
-import { Cart, Homepage, Login, Product, Wishlist, SignUp} from "./pages";
+import { Navbar } from "./components";
+import { Cart, Homepage, Login, Product, Wishlist, SignUp } from "./pages";
 import Mockman from "mockman-js";
-import {Routes, Route} from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -17,7 +17,6 @@ function App() {
         <Route path="/mockman" element={<Mockman />} />
       </Routes>
     </div>
-    
   );
 }
 
