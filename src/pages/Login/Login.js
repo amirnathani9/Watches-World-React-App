@@ -19,13 +19,13 @@ export const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/auth/login", userData);
-      const { foundUser, encodedToken } = response.data;
+      const { foundUser: user, encodedToken } = response.data;
       if (response.status === 200) {
         authDispatch({
           type: "AUTH_SUCCESS",
-          payload: { foundUser, encodedToken },
+          payload: { user, encodedToken, isAuth: true },
         });
-        localStorage.setItem("user", JSON.stringify(foundUser));
+        localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("encodedToken", encodedToken);
         localStorage.setItem("isAuth", true);
         navigate("/");
