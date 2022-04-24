@@ -29,7 +29,6 @@ export const Login = () => {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("encodedToken", encodedToken);
         localStorage.setItem("isAuth", true);
-        console.log(location.state?.from?.pathname)
         navigate(location.state?.from?.pathname || "/", {replace: true});
       }
     } catch (error) {
@@ -46,7 +45,12 @@ export const Login = () => {
           <h1 className="section-heading font-bold border-radius-1 p-2 my-4">
             Login
           </h1>
-          <form>
+          <form onSubmit={(e) =>
+                loginButtonHandler(e, {
+                  email: user.email,
+                  password: user.password,
+                })
+              }>
             <label className="input-label my-4">
               Email*
               <input
@@ -86,14 +90,7 @@ export const Login = () => {
               </div>
             </div>
             <button
-              type="submit"
               className="btn primary-outline-btn font-size-5 border-radius-1 py-2"
-              onClick={(e) =>
-                loginButtonHandler(e, {
-                  email: user.email,
-                  password: user.password,
-                })
-              }
             >
               Login
             </button>

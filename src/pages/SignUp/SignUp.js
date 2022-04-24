@@ -19,7 +19,7 @@ export function SignUp() {
     signUpReducer,
     initialSignUpValue
   );
-
+    // console.log(signUpState)
   const { firstName, lastName, email, password, confirmPassword } = signUpState;
   const { authDispatch } = useAuth();
   const navigate = useNavigate()
@@ -29,7 +29,7 @@ export function SignUp() {
     try {
       const response = await axios.post("/api/auth/signup", userData);
       const { createdUser: user, encodedToken } = response.data;
-      if(response.status === 200){
+      if(response.status === 201){
       authDispatch({
         type: "AUTH_SUCCESS",
         payload: { user, encodedToken, isAuth: true },
@@ -52,7 +52,7 @@ export function SignUp() {
           <h1 className="section-heading font-bold border-radius-1 p-2 my-2">
             Signup
           </h1>
-          <form>
+          <form onSubmit={(e) => signUpBtnHandler(e, signUpState)}>
             <label className="input-label my-2">
               First Name*
               <input
@@ -129,10 +129,8 @@ export function SignUp() {
               <input type="checkbox" /> I accept all the Terms & Conditions
             </label>
             <button
-              type="Submit"
               className="btn primary-outline-btn font-size-6 border-radius-1 py-3"
               disabled = {password !== confirmPassword}
-              onClick={(e) => signUpBtnHandler(e, signUpState)}
             >
               Signup
             </button>
