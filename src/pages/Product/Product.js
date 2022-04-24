@@ -16,6 +16,7 @@ import {
   getSortedPriceProducts,
 } from "../../utilities";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function Product() {
   const { products } = useProducts();
@@ -26,6 +27,7 @@ export function Product() {
   const {
     authState: { encodedToken },
   } = useAuth();
+  const navigate = useNavigate()
 
   const addToCartHandler = async (product) => {
     try {
@@ -37,6 +39,8 @@ export function Product() {
       setCartItems(response.data.cart);
     } catch (error) {
       console.log(error);
+      navigate("/login")
+      
     }
   };
   const addToWishlistHandler = async (product) => {
@@ -49,6 +53,7 @@ export function Product() {
       setWishlistItems(response.data.wishlist);
     } catch (error) {
       console.log(error);
+      navigate("/login")
     }
   };
 
