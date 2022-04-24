@@ -27,6 +27,7 @@ export const Login = () => {
         });
         localStorage.setItem("user", JSON.stringify(foundUser));
         localStorage.setItem("encodedToken", encodedToken);
+        localStorage.setItem("isAuth", true);
         navigate("/");
       }
     } catch (error) {

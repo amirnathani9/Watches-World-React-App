@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
       payload: {
         user: JSON.parse(localStorage.getItem("user")),
         encodedToken: localStorage.getItem("token"),
+        isAuth: true
       },
     });
   }, []);

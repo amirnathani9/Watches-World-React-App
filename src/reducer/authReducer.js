@@ -3,7 +3,7 @@ export const authReducer = (state, action) => {
     case "AUTH_SUCCESS":
       return {
         ...state,
-        isAuth: action.payload.encodedToken ? true : false,
+        isAuth: true,
         user: action.payload.user,
         encodedToken: action.payload.encodedToken,
       };
