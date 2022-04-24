@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import "./Login.css";
@@ -7,6 +7,7 @@ import { useAuth } from "../../contexts";
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+  const location = useLocation()
   const { authDispatch } = useAuth();
 
   const [hidePass, sethidePass] = useState(true);
@@ -28,7 +29,8 @@ export const Login = () => {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("encodedToken", encodedToken);
         localStorage.setItem("isAuth", true);
-        navigate("/");
+        console.log(location.state?.from?.pathname)
+        navigate(location.state?.from?.pathname || "/", {replace: true});
       }
     } catch (error) {
       console.log(error);

@@ -45,7 +45,7 @@ export function Navbar() {
             <li>
               {isAuth ? (
                 <Link
-                  to="/login"
+                  to="/"
                   className="border-radius-2"
                   onClick={logoutHandler}
                 >
