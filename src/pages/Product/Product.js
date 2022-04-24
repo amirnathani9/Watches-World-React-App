@@ -1,9 +1,9 @@
 import "./Product.css";
 import { useEffect } from "react";
 import { Filter, ProductListing } from "../../components";
-import { encodedToken } from "../../utilities/token";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import {
+  useAuth,
   useCart,
   useProducts,
   useProductsFilter,
@@ -22,7 +22,10 @@ export function Product() {
   const { state } = useProductsFilter();
   const { sortByPrice, categories, price, rating } = state;
   const { setCartItems } = useCart();
-  const { setWishlistItems } = useWishlist()
+  const { setWishlistItems } = useWishlist();
+  const {
+    authState: { encodedToken },
+  } = useAuth();
 
   const addToCartHandler = async (product) => {
     try {

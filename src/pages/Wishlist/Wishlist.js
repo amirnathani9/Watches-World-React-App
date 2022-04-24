@@ -2,14 +2,16 @@ import "./Wishlist.css";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 import { EmptyWishlist, WishlistCard } from "../../components";
-import { useCart, useWishlist } from "../../contexts";
+import { useAuth, useCart, useWishlist } from "../../contexts";
 import axios from "axios";
-import { encodedToken } from "../../utilities/token";
 import { removeFromWishlistHandler } from "../../utilities/wishlist/removeFromWishlist";
 
 export const Wishlist = () => {
   const { wishlistItems, setWishlistItems } = useWishlist();
   const { setCartItems } = useCart();
+  const {
+    authState: { encodedToken },
+  } = useAuth();
 
   const moveToCartHandler = async (product) => {
     try {
@@ -28,7 +30,7 @@ export const Wishlist = () => {
   useDocumentTitle("Wishlist - Watches World");
   return (
     <div>
-      {wishlistItems.length<=0 ? (
+      {wishlistItems.length <= 0 ? (
         <EmptyWishlist />
       ) : (
         <section className="section-center flex flex-col justify-ceneter items-center my-4">
