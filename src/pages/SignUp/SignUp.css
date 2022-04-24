@@ -24,3 +24,7 @@
 .new-account-btn:hover{
     text-decoration: underline;
 }
+.password-match-alert{
+    color: var(--danger-dark-color);
+    margin-top: 2px;
+}
