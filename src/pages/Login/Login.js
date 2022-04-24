@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts";
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const { authDispatch } = useAuth();
 
   const [hidePass, sethidePass] = useState(true);
@@ -29,7 +29,7 @@ export const Login = () => {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("encodedToken", encodedToken);
         localStorage.setItem("isAuth", true);
-        navigate(location.state?.from?.pathname || "/", {replace: true});
+        navigate(location.state?.from?.pathname || "/", { replace: true });
       }
     } catch (error) {
       console.log(error);
@@ -45,12 +45,14 @@ export const Login = () => {
           <h1 className="section-heading font-bold border-radius-1 p-2 my-4">
             Login
           </h1>
-          <form onSubmit={(e) =>
-                loginButtonHandler(e, {
-                  email: user.email,
-                  password: user.password,
-                })
-              }>
+          <form
+            onSubmit={(e) =>
+              loginButtonHandler(e, {
+                email: user.email,
+                password: user.password,
+              })
+            }
+          >
             <label className="input-label my-4">
               Email*
               <input
@@ -89,9 +91,7 @@ export const Login = () => {
                 Forget your Password
               </div>
             </div>
-            <button
-              className="btn primary-outline-btn font-size-5 border-radius-1 py-2"
-            >
+            <button className="btn primary-outline-btn font-size-5 border-radius-1 py-2">
               Login
             </button>
             <button

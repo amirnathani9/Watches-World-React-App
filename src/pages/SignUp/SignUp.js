@@ -1,4 +1,4 @@
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useReducer } from "react";
 import "./SignUp.css";
 import axios from "axios";
@@ -13,35 +13,34 @@ export function SignUp() {
     password: "",
     confirmPassword: "",
   };
-  
 
   const [signUpState, signUpDispatch] = useReducer(
     signUpReducer,
     initialSignUpValue
   );
-    // console.log(signUpState)
+  // console.log(signUpState)
   const { firstName, lastName, email, password, confirmPassword } = signUpState;
   const { authDispatch } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const signUpBtnHandler = async (e, userData) => {
     e.preventDefault();
     try {
       const response = await axios.post("/api/auth/signup", userData);
       const { createdUser: user, encodedToken } = response.data;
-      if(response.status === 201){
-      authDispatch({
-        type: "AUTH_SUCCESS",
-        payload: { user, encodedToken, isAuth: true },
-      });
-      localStorage.setItem("user", JSON.stringify(user))
-      localStorage.setItem("encodedToken", encodedToken)
-      localStorage.setItem("isAuth", true)
-      navigate("/")
-    }
+      if (response.status === 201) {
+        authDispatch({
+          type: "AUTH_SUCCESS",
+          payload: { user, encodedToken, isAuth: true },
+        });
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("encodedToken", encodedToken);
+        localStorage.setItem("isAuth", true);
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
-      signUpDispatch({type:"CLEAR"})
+      signUpDispatch({ type: "CLEAR" });
     }
   };
 
@@ -123,14 +122,18 @@ export function SignUp() {
                   })
                 }
               />
-              {password !== confirmPassword && <p className="password-match-alert font-size-4">Password Not Match</p>}
+              {password !== confirmPassword && (
+                <p className="password-match-alert font-size-4">
+                  Password Not Match
+                </p>
+              )}
             </label>
             <label className="flex items-center font-bold my-4 letter-spacing-zero">
               <input type="checkbox" /> I accept all the Terms & Conditions
             </label>
             <button
               className="btn primary-outline-btn font-size-6 border-radius-1 py-3"
-              disabled = {password !== confirmPassword}
+              disabled={password !== confirmPassword}
             >
               Signup
             </button>
