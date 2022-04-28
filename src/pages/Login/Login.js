@@ -4,17 +4,14 @@ import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import "./Login.css";
 import axios from "axios";
 import { useAuth } from "../../contexts";
+import { usePasswordToggle } from "../../hooks/usePasswordToggle";
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const location = useLocation();
   const { authDispatch } = useAuth();
 
-  const [hidePass, sethidePass] = useState(true);
-
-  const showHide = () => {
-    hidePass ? sethidePass(false) : sethidePass(true);
-  };
+  const {hidePass, showHide} = usePasswordToggle()
 
   const loginButtonHandler = async (e, userData) => {
     e.preventDefault();

@@ -4,6 +4,8 @@ import "./SignUp.css";
 import axios from "axios";
 import { useAuth } from "../../contexts/auth-context";
 import { signUpReducer } from "../../reducer";
+import { usePasswordToggle } from "../../hooks/usePasswordToggle";
+import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 export function SignUp() {
   const initialSignUpValue = {
@@ -21,6 +23,8 @@ export function SignUp() {
   const { firstName, lastName, email, password, confirmPassword } = signUpState;
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
+
+  const {hidePass, showHide} = usePasswordToggle()
 
   const signUpBtnHandler = async (e, userData) => {
     e.preventDefault();
@@ -43,6 +47,7 @@ export function SignUp() {
     }
   };
 
+  useDocumentTitle("SignUp - Watches World");
   return (
     <>
       <section className="signup-section section-center flex justify-center items-center">
@@ -93,10 +98,10 @@ export function SignUp() {
                 }
               />
             </label>
-            <label className="input-label my-2">
+            <label className="input-label my-2 relative">
               Password*
               <input
-                type="password"
+                 type={hidePass ? "password" : "text"}
                 placeholder="Enter your password"
                 className="input border-radius-1"
                 value={password}
@@ -105,6 +110,13 @@ export function SignUp() {
                   signUpDispatch({ type: "PASSWORD", payload: e.target.value })
                 }
               />
+              <i
+                className={`${
+                  hidePass ? "fa fa-eye" : "fa fa-eye-slash"
+                } pointer absolute show-hide-btn`}
+                aria-hidden="true"
+                onClick={showHide}
+              ></i>
             </label>
             <label className="input-label my-2">
               Confirm Password*
