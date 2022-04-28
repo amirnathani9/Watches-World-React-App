@@ -7,4 +7,6 @@ export {
 
 export { useCart, CartProvider } from "./cart-context";
 
-export { useWishlist, WishlistProvider} from "./wislist-context"
+export { useWishlist, WishlistProvider } from "./wislist-context";
+
+export { AuthProvider, useAuth } from "./auth-context";
