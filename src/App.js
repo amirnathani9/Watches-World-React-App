@@ -3,11 +3,23 @@ import { Cart, Homepage, Login, Product, Wishlist, SignUp } from "./pages";
 import Mockman from "mockman-js";
 import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./utilities/ProtectedRoute/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div>
       <Navbar />
+      <ToastContainer
+        position="bottom-left"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/products" element={<Product />} />
