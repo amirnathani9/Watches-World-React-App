@@ -1,24 +1,12 @@
-import { Navbar } from "./components";
-import { Cart, Homepage, Login, Product, Wishlist, SignUp } from "./pages";
+import {Navbar} from "./components"
+import { Cart, Homepage, Login, Product, Wishlist, SignUp} from "./pages";
 import Mockman from "mockman-js";
-import { Routes, Route } from "react-router-dom";
-import ToastContainer from "react-toastify";
+import {Routes, Route} from "react-router-dom"
 
 function App() {
   return (
     <div>
       <Navbar />
-      <ToastContainer
-        position="bottom-left"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/products" element={<Product />} />
