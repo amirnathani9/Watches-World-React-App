@@ -1,10 +1,10 @@
 import { toast } from "react-toastify";
 
-export const useToast = () => {
+const useToast = () => {
   const showToast = (toastMsg, toastTheme) => {
     const notify = () => {
       toast[toastTheme](toastMsg, {
-        position: "bottom-left",
+        position: "bottom-right",
         autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,
@@ -15,5 +15,6 @@ export const useToast = () => {
     };
     notify();
   };
-  return showToast;
+  return { showToast };
 };
+export { useToast };

@@ -8,9 +8,8 @@ import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <div>
-      <Navbar />
       <ToastContainer
-        position="bottom-left"
+        position="bottom-right"
         autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
@@ -20,6 +19,7 @@ function App() {
         draggable
         pauseOnHover
       />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/products" element={<Product />} />
