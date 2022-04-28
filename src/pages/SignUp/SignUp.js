@@ -18,7 +18,6 @@ export function SignUp() {
     signUpReducer,
     initialSignUpValue
   );
-  // console.log(signUpState)
   const { firstName, lastName, email, password, confirmPassword } = signUpState;
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
