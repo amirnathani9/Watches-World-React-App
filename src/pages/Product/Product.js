@@ -17,6 +17,7 @@ import {
 } from "../../utilities";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../../hooks";
 
 export function Product() {
   const { products } = useProducts();
@@ -27,7 +28,9 @@ export function Product() {
   const {
     authState: { encodedToken },
   } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const { showToast } = useToast();
 
   const addToCartHandler = async (product) => {
     try {
@@ -37,10 +40,10 @@ export function Product() {
         { headers: { authorization: encodedToken } }
       );
       setCartItems(response.data.cart);
+      showToast("Item Added to Cart!", "success");
     } catch (error) {
-      console.log(error);
-      navigate("/login")
-      
+      showToast("You are Not Logged In!", "error");
+      navigate("/login");
     }
   };
   const addToWishlistHandler = async (product) => {
@@ -51,9 +54,10 @@ export function Product() {
         { headers: { authorization: encodedToken } }
       );
       setWishlistItems(response.data.wishlist);
+      showToast("Item Added to Wishlist!", "success");
     } catch (error) {
-      console.log(error);
-      navigate("/login")
+      showToast("You are Not Logged In!", "error");
+      navigate("/login");
     }
   };
 

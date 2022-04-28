@@ -5,6 +5,7 @@ import { EmptyWishlist, WishlistCard } from "../../components";
 import { useAuth, useCart, useWishlist } from "../../contexts";
 import axios from "axios";
 import { removeFromWishlistHandler } from "../../utilities/wishlist/removeFromWishlist";
+import { useToast } from "../../hooks";
 
 export const Wishlist = () => {
   const { wishlistItems, setWishlistItems } = useWishlist();
@@ -12,6 +13,8 @@ export const Wishlist = () => {
   const {
     authState: { encodedToken },
   } = useAuth();
+
+  const { showToast } = useToast();
 
   const moveToCartHandler = async (product) => {
     try {
@@ -21,9 +24,10 @@ export const Wishlist = () => {
         { headers: { authorization: encodedToken } }
       );
       setCartItems(response.data.cart);
-      removeFromWishlistHandler(product._id, setWishlistItems);
+      removeFromWishlistHandler(product._id, setWishlistItems, encodedToken);
+      showToast("Item Moved To Cart!", "success");
     } catch (error) {
-      console.log(error);
+      showToast(error.response.data, "error");
     }
   };
 

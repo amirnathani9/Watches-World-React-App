@@ -2,6 +2,7 @@ import axios from "axios";
 import { CartPriceCard, EmptyCart, HorizontalCard } from "../../components";
 import { useAuth, useCart, useWishlist } from "../../contexts";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { useToast } from "../../hooks";
 import "./Cart.css";
 export const Cart = () => {
   const { cartItems, setCartItems } = useCart();
@@ -9,6 +10,7 @@ export const Cart = () => {
   const {
     authState: { encodedToken },
   } = useAuth();
+  const { showToast } = useToast();
 
   const removeFromCartHandler = async (productId) => {
     try {
@@ -16,8 +18,9 @@ export const Cart = () => {
         headers: { authorization: encodedToken },
       });
       setCartItems(response.data.cart);
+      showToast("Item Removed from Cart!", "success");
     } catch (error) {
-      console.log(error);
+      showToast(error.response.data, "error");
     }
   };
   const productsQuantityHandler = async (productId, btnType) => {
@@ -39,7 +42,7 @@ export const Cart = () => {
         setCartItems(response.data.cart);
       }
     } catch (error) {
-      console.log(error);
+      showToast(error.response.data, "error");
     }
   };
 
@@ -52,8 +55,9 @@ export const Cart = () => {
       );
       setWishlistItems(respone.data.wishlist);
       removeFromCartHandler(product._id);
+      showToast("Item Moved to Wishlist!", "success");
     } catch (error) {
-      console.log(error);
+      showToast(error.response.data, "error");
     }
   };
 

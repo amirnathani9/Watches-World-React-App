@@ -29,7 +29,7 @@ export const Login = () => {
         localStorage.setItem("encodedToken", encodedToken);
         localStorage.setItem("isAuth", true);
         navigate(location.state?.from?.pathname || "/", { replace: true });
-        showToast("LoggedIn!","success")
+        showToast("You are Logged In!","success")
       }
     } catch (error) {
       showToast(error.response.data.errors[0], "error");

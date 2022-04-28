@@ -2,6 +2,7 @@ import logo from "../../assets/watches-world-logo.png";
 import { Link } from "react-router-dom";
 import { useAuth, useCart, useWishlist } from "../../contexts";
 import { useEffect } from "react";
+import { useToast } from "../../hooks";
 
 export function Navbar() {
   const { cartItems, setCartItems } = useCart();
@@ -10,16 +11,17 @@ export function Navbar() {
     authState: { isAuth },
     authDispatch,
   } = useAuth();
-
-  useEffect(()=>{
-    if(!isAuth){
-      setCartItems([])
-      setWishlistItems([])
+  const { showToast } = useToast();
+  useEffect(() => {
+    if (!isAuth) {
+      setCartItems([]);
+      setWishlistItems([]);
     }
-  })
-  
+  });
+
   const logoutHandler = () => {
     localStorage.clear();
+    showToast("You are Logged Out!", "success");
     authDispatch({ type: "LOGOUT" });
   };
   return (

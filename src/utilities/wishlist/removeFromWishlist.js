@@ -3,14 +3,16 @@ import axios from "axios";
 export const removeFromWishlistHandler = async (
   productId,
   setWishlistItems,
-  encodedToken
+  encodedToken,
+  showToast
 ) => {
   try {
     const response = await axios.delete(`/api/user/wishlist/${productId}`, {
       headers: { authorization: encodedToken },
     });
     setWishlistItems(response.data.wishlist);
+    showToast("Item Removed from Wishlist!", "success");
   } catch (error) {
-    console.log(error);
+    showToast(error.response.data, "error");
   }
 };

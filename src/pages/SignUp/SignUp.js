@@ -6,6 +6,7 @@ import { useAuth } from "../../contexts/auth-context";
 import { signUpReducer } from "../../reducer";
 import { usePasswordToggle } from "../../hooks/usePasswordToggle";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { useToast } from "../../hooks";
 
 export function SignUp() {
   const initialSignUpValue = {
@@ -24,7 +25,8 @@ export function SignUp() {
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
 
-  const {hidePass, showHide} = usePasswordToggle()
+  const { hidePass, showHide } = usePasswordToggle();
+  const { showToast } = useToast();
 
   const signUpBtnHandler = async (e, userData) => {
     e.preventDefault();
@@ -39,10 +41,11 @@ export function SignUp() {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("encodedToken", encodedToken);
         localStorage.setItem("isAuth", true);
+        showToast("Account Created Successfully!", "success");
         navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      showToast(error.response.data.errors[0], "error");
       signUpDispatch({ type: "CLEAR" });
     }
   };
@@ -101,7 +104,7 @@ export function SignUp() {
             <label className="input-label my-2 relative">
               Password*
               <input
-                 type={hidePass ? "password" : "text"}
+                type={hidePass ? "password" : "text"}
                 placeholder="Enter your password"
                 className="input border-radius-1"
                 value={password}

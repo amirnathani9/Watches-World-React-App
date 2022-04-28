@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useCart, useWishlist } from "../../contexts";
+import { useAuth, useCart, useWishlist } from "../../contexts";
+import { useToast } from "../../hooks";
 import { removeFromWishlistHandler } from "../../utilities/wishlist/removeFromWishlist";
 
 export function ProductListing({
@@ -18,6 +19,10 @@ export function ProductListing({
   const { cartItems } = useCart();
   const { wishlistItems, setWishlistItems } = useWishlist();
   const navigate = useNavigate();
+  const {
+    authState: { encodedToken },
+  } = useAuth();
+  const { showToast } = useToast();
   return (
     <>
       <div className="card card-vertical border-radius-1 m-8">
@@ -26,7 +31,14 @@ export function ProductListing({
           {wishlistItems.find((item) => item._id === _id) ? (
             <i
               className="fas fa-heart wishlist-icon"
-              onClick={()=>removeFromWishlistHandler(_id,setWishlistItems)}
+              onClick={() =>
+                removeFromWishlistHandler(
+                  _id,
+                  setWishlistItems,
+                  encodedToken,
+                  showToast
+                )
+              }
             ></i>
           ) : (
             <i
