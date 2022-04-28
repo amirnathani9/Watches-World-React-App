@@ -5,11 +5,13 @@ import "./Login.css";
 import axios from "axios";
 import { useAuth } from "../../contexts";
 import { usePasswordToggle } from "../../hooks/usePasswordToggle";
+import {useToast} from "../../hooks/useToast"
 export const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const location = useLocation();
   const { authDispatch } = useAuth();
+  const { showToast } = useToast()
 
   const {hidePass, showHide} = usePasswordToggle()
 
@@ -27,9 +29,10 @@ export const Login = () => {
         localStorage.setItem("encodedToken", encodedToken);
         localStorage.setItem("isAuth", true);
         navigate(location.state?.from?.pathname || "/", { replace: true });
+        showToast("LoggedIn!","success")
       }
     } catch (error) {
-      console.log(error);
+      showToast(error.response.data.errors[0], "error");
       navigate("/login");
     }
   };
