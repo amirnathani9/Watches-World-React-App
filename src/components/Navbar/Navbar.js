@@ -1,15 +1,23 @@
 import logo from "../../assets/watches-world-logo.png";
 import { Link } from "react-router-dom";
 import { useAuth, useCart, useWishlist } from "../../contexts";
+import { useEffect } from "react";
 
 export function Navbar() {
-  const { cartItems } = useCart();
-  const { wishlistItems } = useWishlist();
+  const { cartItems, setCartItems } = useCart();
+  const { wishlistItems, setWishlistItems } = useWishlist();
   const {
     authState: { isAuth },
     authDispatch,
   } = useAuth();
 
+  useEffect(()=>{
+    if(!isAuth){
+      setCartItems([])
+      setWishlistItems([])
+    }
+  },[isAuth])
+  
   const logoutHandler = () => {
     localStorage.clear();
     authDispatch({ type: "LOGOUT" });
