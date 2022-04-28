@@ -1,9 +1,9 @@
 import "./Product.css";
 import { useEffect } from "react";
 import { Filter, ProductListing } from "../../components";
-import { encodedToken } from "../../utilities/token";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 import {
+  useAuth,
   useCart,
   useProducts,
   useProductsFilter,
@@ -16,13 +16,18 @@ import {
   getSortedPriceProducts,
 } from "../../utilities";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function Product() {
   const { products } = useProducts();
   const { state } = useProductsFilter();
   const { sortByPrice, categories, price, rating } = state;
   const { setCartItems } = useCart();
-  const { setWishlistItems } = useWishlist()
+  const { setWishlistItems } = useWishlist();
+  const {
+    authState: { encodedToken },
+  } = useAuth();
+  const navigate = useNavigate()
 
   const addToCartHandler = async (product) => {
     try {
@@ -34,6 +39,8 @@ export function Product() {
       setCartItems(response.data.cart);
     } catch (error) {
       console.log(error);
+      navigate("/login")
+      
     }
   };
   const addToWishlistHandler = async (product) => {
@@ -46,6 +53,7 @@ export function Product() {
       setWishlistItems(response.data.wishlist);
     } catch (error) {
       console.log(error);
+      navigate("/login")
     }
   };
 

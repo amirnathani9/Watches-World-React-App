@@ -1,10 +1,27 @@
 import logo from "../../assets/watches-world-logo.png";
 import { Link } from "react-router-dom";
-import { useCart, useWishlist } from "../../contexts";
+import { useAuth, useCart, useWishlist } from "../../contexts";
+import { useEffect } from "react";
 
 export function Navbar() {
-  const {cartItems} = useCart()
-  const {wishlistItems} =useWishlist()
+  const { cartItems, setCartItems } = useCart();
+  const { wishlistItems, setWishlistItems } = useWishlist();
+  const {
+    authState: { isAuth },
+    authDispatch,
+  } = useAuth();
+
+  useEffect(()=>{
+    if(!isAuth){
+      setCartItems([])
+      setWishlistItems([])
+    }
+  },[isAuth])
+  
+  const logoutHandler = () => {
+    localStorage.clear();
+    authDispatch({ type: "LOGOUT" });
+  };
   return (
     <>
       <nav className="navbar-container sticky z-5">
@@ -34,20 +51,34 @@ export function Navbar() {
           </div>
           <ul className="navbar-links">
             <li>
-              <Link to="/login" className="border-radius-2">
-                <i className="fas fa-user"></i>Login
-              </Link>
+              {isAuth ? (
+                <Link
+                  to="/"
+                  className="border-radius-2"
+                  onClick={logoutHandler}
+                >
+                  <i className="fas fa-user"></i>Logout
+                </Link>
+              ) : (
+                <Link to="/login" className="border-radius-2">
+                  <i className="fas fa-user"></i>Login
+                </Link>
+              )}
             </li>
             <li>
               <Link to="/wishlist" className="border-radius-2 relative">
                 <i className="fas fa-heart"></i>Wishlist
-                <span className="badge badge-wh-4 navbar-badge-wishlist font-bold font-size-3">{wishlistItems.length}</span>
+                <span className="badge badge-wh-4 navbar-badge-wishlist font-bold font-size-3">
+                  {wishlistItems.length}
+                </span>
               </Link>
             </li>
             <li>
               <Link to="/cart" className="border-radius-2 relative">
                 <i className="fas fa-shopping-cart"></i>Cart
-                <span className="badge badge-wh-4 navbar-badge-cart font-bold font-size-3">{cartItems.length}</span>
+                <span className="badge badge-wh-4 navbar-badge-cart font-bold font-size-3">
+                  {cartItems.length}
+                </span>
               </Link>
             </li>
           </ul>

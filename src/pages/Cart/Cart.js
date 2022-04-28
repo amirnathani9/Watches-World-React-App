@@ -1,12 +1,14 @@
 import axios from "axios";
 import { CartPriceCard, EmptyCart, HorizontalCard } from "../../components";
-import { useCart, useWishlist } from "../../contexts";
+import { useAuth, useCart, useWishlist } from "../../contexts";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
-import { encodedToken } from "../../utilities/token";
 import "./Cart.css";
 export const Cart = () => {
   const { cartItems, setCartItems } = useCart();
   const { setWishlistItems } = useWishlist();
+  const {
+    authState: { encodedToken },
+  } = useAuth();
 
   const removeFromCartHandler = async (productId) => {
     try {
@@ -49,7 +51,7 @@ export const Cart = () => {
         { headers: { authorization: encodedToken } }
       );
       setWishlistItems(respone.data.wishlist);
-      removeFromCartHandler(product._id)
+      removeFromCartHandler(product._id);
     } catch (error) {
       console.log(error);
     }
