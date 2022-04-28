@@ -16,7 +16,7 @@ export function Navbar() {
       setCartItems([])
       setWishlistItems([])
     }
-  },[isAuth])
+  })
   
   const logoutHandler = () => {
     localStorage.clear();
