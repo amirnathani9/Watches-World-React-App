@@ -5,6 +5,7 @@ import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
 import {
+  AuthProvider,
   CartProvider,
   ProductsFilterProvider,
   ProductsProvider,
@@ -21,16 +22,18 @@ const root = ReactDOMClient.createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <ProductsProvider>
-        <ProductsFilterProvider>
-          <CartProvider>
-            <WishlistProvider>
-              <App />
-            </WishlistProvider>
-          </CartProvider>
-        </ProductsFilterProvider>
-      </ProductsProvider>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <ProductsProvider>
+          <ProductsFilterProvider>
+            <CartProvider>
+              <WishlistProvider>
+                <App />
+              </WishlistProvider>
+            </CartProvider>
+          </ProductsFilterProvider>
+        </ProductsProvider>
+      </Router>
+    </AuthProvider>
   </React.StrictMode>
 );

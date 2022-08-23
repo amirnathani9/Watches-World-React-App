@@ -1,26 +1,41 @@
-.login-section{
+.login-section {
     height: 91vh;
 }
-.login-main-container{
+
+.login-main-container {
     padding: 2rem;
     box-shadow: 5px 5px 10px rgba(2, 129, 149, 0.3);
 }
-.btn{
+
+.btn {
     margin: 1rem 0rem;
     width: 100%;
 }
-.forget-password{
+
+.forget-password {
     color: var(--primary-color);
 }
-.forget-password:hover{
+
+.forget-password:hover {
     text-decoration: underline;
 }
-.new-account-btn{
+
+.new-account-btn {
     color: var(--primary-color);
     font-weight: bold;
     margin: 1rem;
     font-size: 1.25rem;
 }
-.new-account-btn:hover{
+
+.new-account-btn:hover {
     text-decoration: underline;
+}
+
+.show-hide-btn {
+    top: 38px;
+    right: 12px;
+}
+
+.show-hide-btn:hover {
+    opacity: 0.8;
 }
